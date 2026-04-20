@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    TechBridge Institute — About Us Page (about.html)
+    ==================================================
+    Purpose : Organisation history timeline, organogram,
+              mission statement, and vision statement.
+    Linked  : index.html | organization.html | contact.html
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn about TechBridge Institute's history, mission, vision, and leadership structure.">
+  <title>About Us | TechBridge Institute</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ── About page specific styles ── */
+
+    /* Values grid */
+    .value-item {
+      padding: 24px;
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .value-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .value-item h4 { margin-bottom: 4px; }
+    .value-item p  { font-size: 0.9rem; color: var(--color-text-muted); margin:0; }
+
+    /* Intro two-column split */
+    .about-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .intro-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #dbe8f7;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+      font-weight: 500;
+      font-size: 0.9rem;
+      border: 1px solid var(--color-border);
+    }
+
+    @media (max-width: 720px) {
+      .about-intro { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       NAVIGATION (shared across all pages)
+  ══════════════════════════════════════════ -->
+  <header class="site-header" role="banner">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="TechBridge Institute — Home">
+        <div class="nav-logo-icon" aria-hidden="true">TB</div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">TechBridge Institute</span>
+          <span class="nav-logo-tagline">Bridging Education &amp; Technology</span>
+        </div>
+      </a>
+      <nav aria-label="Primary navigation">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html" class="active" aria-current="page">About us</a></li>
+          <li><a href="organization.html">Organisation</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════
+       PAGE HERO
+  ══════════════════════════════════════════ -->
+  <section class="page-hero" aria-labelledby="page-heading">
+    <div class="container">
+      <p class="section-label" style="color:var(--color-accent);">Who we are</p>
+      <h1 id="page-heading">About TechBridge Institute</h1>
+      <p>
+        Established in 2009, we have spent over 16 years equipping individuals
+        with transformative digital skills, building a legacy of excellence in
+        technology education across West Africa.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       INTRODUCTION
+  ══════════════════════════════════════════ -->
+  <section class="section bg-white" aria-labelledby="intro-heading">
+    <div class="container">
+      <div class="about-intro">
+        <!-- Text column -->
+        <div>
+          <p class="section-label">Our story</p>
+          <h2 id="intro-heading">Pioneering technology education in Nigeria</h2>
+          <p>
+            TechBridge Institute was founded in 2009 by a group of technology professionals
+            and educators who recognised a critical gap: Nigeria and the broader West African
+            region possessed enormous human capital, yet lacked structured, industry-aligned
+            pathways for technology education.
+          </p>
+          <p>
+            Beginning with a single computer lab and 40 students in Yaba, Lagos, the institute
+            has since grown into a nationally recognised centre of excellence, with campuses in
+            Lagos, Abuja, and Port Harcourt, and a thriving online learning division.
+          </p>
+          <p>
+            Today, TechBridge is accredited by the National Board for Technical Education (NBTE)
+            and maintains active partnerships with over 60 technology companies, ensuring our
+            programmes remain current, practical, and career-focused.
+          </p>
+        </div>
+
+        <!-- Image placeholder (replace with actual campus photo) -->
+        <div class="intro-img" role="img" aria-label="TechBridge Institute Lagos campus">
+          TechBridge Lagos campus
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       HISTORY TIMELINE
+  ══════════════════════════════════════════ -->
+  <section class="section bg-light" aria-labelledby="history-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Our journey</p>
+        <h2 id="history-heading">History of TechBridge Institute</h2>
+        <p>From a single room in Yaba to a multi-campus national institution — our milestones tell a story of determination and impact.</p>
+      </div>
+
+      <!-- Timeline component -->
+      <div style="max-width:720px; margin:0 auto;">
+        <div class="timeline" role="list">
+
+          <!-- 2009 -->
+          <div class="timeline-item" role="listitem">
+            <p class="timeline-year">2009 — Foundation</p>
+            <h4>Institute established in Lagos</h4>
+            <p>
+              TechBridge Institute was founded by Prof. Afolabi Okonkwo and four co-founders
+              with seed funding of ₦5 million. The inaugural batch of 40 students enrolled in
+              basic computer operations and web design courses held in a rented facility in
+              Yaba, Lagos.
+            </p>
+          </div>
+
+          <!-- 2011 -->
+          <div class="timeline-item" role="listitem">
+            <p class="timeline-year">2011 — First accreditation</p>
+            <h4>NBTE accreditation received</h4>
+            <p>
+              The institute received its first formal accreditation from the National Board
+              for Technical Education, legitimising its diploma programmes and enabling
+              graduates to apply for professional certifications.
+            </p>
+          </div>
+
+          <!-- 2013 -->
+          <div class="timeline-item" role="listitem">
+            <p class="timeline-year">2013 — Expansion</p>
+            <h4>Abuja campus opens</h4>
+            <p>
+              Driven by demand from the Federal Capital Territory, TechBridge opened its
+              second campus in Garki, Abuja. Enrolment grew to over 1,200 students across
+              both campuses, and the first software development cohort graduated.
+            </p>
+          </div>
+
+          <!-- 2016 -->
+          <div class="timeline-item" role="listitem">
+            <p class="timeline-year">2016 — Industry integration</p>
+            <h4>Corporate partnership programme launched</h4>
+            <p>
+              The institute formalised its Corporate Partnership Programme, partnering with
+              12 technology companies to co-design curricula, provide guest lecturers,
+              and offer guaranteed internships for top-performing graduates.
+            </p>
+          </div>
+
+          <!-- 2018 -->
+          <div class="timeline-item" role="listitem">
+            <p class="timeline-year">2018 — Port Harcourt campus</p>
+            <h4>South-south expansion completed</h4>
+            <p>
+              The Port Harcourt campus opened in Trans-Amadi, extending TechBridge's reach
+              to the oil-rich South-South region. A specialised data analytics programme
+              tailored to the energy sector was introduced.
+            </p>
+          </div>
+
+          <!-- 2020 -->
+          <div class="timeline-item" role="listitem">
+            <p class="timeline-year">2020 — Digital transformation</p>
+            <h4>Online learning division launched</h4>
+            <p>
+              In response to the COVID-19 pandemic, TechBridge rapidly deployed a
+              full-featured online learning platform. Within six months, over 3,000
+              students were enrolled in remote programmes, cementing the institute's
+              leadership in digital education delivery.
+            </p>
+          </div>
+
+          <!-- 2022 -->
+          <div class="timeline-item" role="listitem">
+            <p class="timeline-year">2022 — Recognition</p>
+            <h4>Named Best Technology Institute in West Africa</h4>
+            <p>
+              TechBridge received the West Africa Technology Education Excellence Award
+              at the annual ECOWAS Education Summit, recognising its graduates' impact
+              across the region's technology sector.
+            </p>
+          </div>
+
+          <!-- 2025 -->
+          <div class="timeline-item" role="listitem">
+            <p class="timeline-year">2025 — Present</p>
+            <h4>12,400+ graduates and growing</h4>
+            <p>
+              TechBridge now serves over 2,500 active students, offers 38 accredited
+              programmes, and maintains a 94% graduate employment rate. The institute
+              continues to expand its Women in Tech and Rural Digital Access initiatives.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       ORGANOGRAM
+  ══════════════════════════════════════════ -->
+  <section class="section bg-white" aria-labelledby="org-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Leadership structure</p>
+        <h2 id="org-heading">Organisational chart</h2>
+        <p>
+          TechBridge Institute operates under a clear governance structure designed for
+          accountability, academic excellence, and operational efficiency.
+        </p>
+      </div>
+
+      <!-- Organogram diagram -->
+      <div class="org-chart" role="img" aria-label="Organisational chart showing Board of Trustees at top, Executive Director below, and four directorate units at the base">
+
+        <!-- Level 1: Board of Trustees -->
+        <div style="margin-bottom:0;">
+          <div class="org-node org-node-top" style="display:inline-flex; border-radius:var(--radius-md);">
+            <span class="org-name">Board of Trustees</span>
+            <span class="org-title" style="color:rgba(255,255,255,0.7);">Governance &amp; oversight</span>
+          </div>
+        </div>
+        <div class="org-connector"></div>
+
+        <!-- Level 2: Executive Director -->
+        <div>
+          <div class="org-node org-node-mid" style="display:inline-flex; border-radius:var(--radius-md);">
+            <span class="org-name">Prof. Afolabi Okonkwo</span>
+            <span class="org-title">Executive Director</span>
+          </div>
+        </div>
+        <div class="org-connector"></div>
+
+        <!-- Level 3: Deputy Director -->
+        <div>
+          <div class="org-node org-node-mid" style="display:inline-flex; border-radius:var(--radius-md);">
+            <span class="org-name">Dr. Chioma Eze</span>
+            <span class="org-title">Deputy Director, Academics</span>
+          </div>
+        </div>
+
+        <!-- Horizontal line connecting level 4 -->
+        <div style="display:flex; justify-content:center; margin:0 auto; width:80%;">
+          <div style="width:100%; height:2px; background:var(--color-border); margin-top:28px; margin-bottom:0;"></div>
+        </div>
+
+        <!-- Level 4: Four directorates -->
+        <div class="org-row" style="margin-top:0; align-items:flex-start;">
+          <div class="org-branch">
+            <div class="org-connector" style="height:20px;"></div>
+            <div class="org-node org-node-low">
+              <span class="org-name">Academics &amp; Training</span>
+              <span class="org-title" style="color:var(--color-text-muted);">Dr. Emeka Nwosu</span>
+            </div>
+          </div>
+          <div class="org-branch">
+            <div class="org-connector" style="height:20px;"></div>
+            <div class="org-node org-node-low">
+              <span class="org-name">Research &amp; Innovation</span>
+              <span class="org-title" style="color:var(--color-text-muted);">Ms. Fatima Bello</span>
+            </div>
+          </div>
+          <div class="org-branch">
+            <div class="org-connector" style="height:20px;"></div>
+            <div class="org-node org-node-low">
+              <span class="org-name">Finance &amp; Operations</span>
+              <span class="org-title" style="color:var(--color-text-muted);">Mr. Tunde Adeyemi</span>
+            </div>
+          </div>
+          <div class="org-branch">
+            <div class="org-connector" style="height:20px;"></div>
+            <div class="org-node org-node-low">
+              <span class="org-name">Student Affairs</span>
+              <span class="org-title" style="color:var(--color-text-muted);">Mrs. Grace Adeola</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.org-chart -->
+
+      <p style="text-align:center; margin-top:20px; font-size:0.85rem; color:var(--color-text-muted);">
+        For a detailed breakdown of each unit's staff and activities, visit the
+        <a href="organization.html">Organisation page</a>.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       MISSION & VISION
+  ══════════════════════════════════════════ -->
+  <section class="section bg-light" aria-labelledby="mv-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Our purpose</p>
+        <h2 id="mv-heading">Mission &amp; vision</h2>
+      </div>
+
+      <div class="grid-2" style="max-width:900px; margin:0 auto;">
+        <!-- Mission -->
+        <div class="mv-card mission" role="article">
+          <h3>
+            <span class="mv-icon mv-icon-blue" aria-hidden="true">M</span>
+            Our mission
+          </h3>
+          <p>
+            To provide high-quality, accessible, and industry-relevant technology education
+            that empowers individuals — regardless of background — to build meaningful
+            careers, contribute to economic development, and drive digital innovation
+            across West Africa.
+          </p>
+          <p>
+            We achieve this by maintaining rigorous academic standards, fostering strong
+            industry partnerships, and cultivating an inclusive learning environment that
+            celebrates diversity and nurtures every student's full potential.
+          </p>
+        </div>
+
+        <!-- Vision -->
+        <div class="mv-card vision" role="article">
+          <h3>
+            <span class="mv-icon mv-icon-amber" aria-hidden="true">V</span>
+            Our vision
+          </h3>
+          <p>
+            To be the leading technology education institution in Africa — globally
+            recognised for the quality of our graduates, the depth of our research,
+            and the breadth of our impact on communities and economies across the continent.
+          </p>
+          <p>
+            By 2030, we aspire to have trained 50,000 technology professionals, launched
+            500 student-founded ventures, and established TechBridge hubs in every
+            ECOWAS member state.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       CORE VALUES
+  ══════════════════════════════════════════ -->
+  <section class="section bg-white" aria-labelledby="values-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What drives us</p>
+        <h2 id="values-heading">Our core values</h2>
+      </div>
+
+      <div class="grid-3" style="max-width:960px; margin:0 auto;">
+        <div class="value-item">
+          <div class="value-dot" aria-hidden="true">1</div>
+          <div>
+            <h4>Excellence</h4>
+            <p>We hold ourselves to the highest academic and professional standards in every programme we deliver.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-dot" aria-hidden="true">2</div>
+          <div>
+            <h4>Inclusivity</h4>
+            <p>We believe technology education should be accessible to everyone, regardless of gender, location, or economic status.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-dot" aria-hidden="true">3</div>
+          <div>
+            <h4>Innovation</h4>
+            <p>We continuously evolve our curricula and teaching methods to remain at the frontier of technology education.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-dot" aria-hidden="true">4</div>
+          <div>
+            <h4>Integrity</h4>
+            <p>We act with transparency, honesty, and accountability in all our dealings with students, partners, and the public.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-dot" aria-hidden="true">5</div>
+          <div>
+            <h4>Community</h4>
+            <p>We invest in the communities around us, recognising that our success is inseparable from the well-being of our society.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-dot" aria-hidden="true">6</div>
+          <div>
+            <h4>Partnership</h4>
+            <p>We build strong, lasting relationships with industry, government, and civil society to create real-world impact.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       FOOTER (shared across all pages)
+  ══════════════════════════════════════════ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-brand-name">TechBridge Institute</p>
+          <p class="footer-tagline">Bridging education and technology across West Africa since 2009.</p>
+        </div>
+        <div>
+          <h5>Quick links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="organization.html">Organisation</a></li>
+            <li><a href="contact.html">Contact us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Programmes</h5>
+          <ul class="footer-links">
+            <li><a href="about.html">Software development</a></li>
+            <li><a href="about.html">Data science &amp; AI</a></li>
+            <li><a href="about.html">Cybersecurity</a></li>
+            <li><a href="about.html">Digital entrepreneurship</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Contact</h5>
+          <ul class="footer-links">
+            <li style="color:rgba(255,255,255,0.65); font-size:0.88rem;">14 Innovation Drive, Victoria Island, Lagos</li>
+            <li><a href="tel:+2341234567890">+234 (0)12-345-6789</a></li>
+            <li><a href="mailto:info@techbridge.edu.ng">info@techbridge.edu.ng</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 TechBridge Institute. All rights reserved.</p>
+        <p>Designed for educational purposes.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

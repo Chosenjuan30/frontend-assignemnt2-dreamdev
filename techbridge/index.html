@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    TechBridge Institute — Home Page (index.html)
+    ==============================================
+    Purpose : Landing page featuring a welcome message from
+              the Executive Director, key statistics, core
+              programmes, and recent news highlights.
+    Linked  : about.html | organization.html | contact.html
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TechBridge Institute — Bridging the gap between education and technology in Africa.">
+  <title>TechBridge Institute | Home</title>
+  <!-- Shared stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Page-specific styles -->
+  <style>
+    /* ── Hero section ── */
+    .hero {
+      background: var(--color-primary-dk);
+      color: #fff;
+      padding: 80px 0 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative geometric accent */
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: rgba(232, 160, 32, 0.08);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-headline {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .hero-headline span { color: var(--color-accent); }
+
+    .hero-lead {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 32px;
+      max-width: 520px;
+    }
+
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* Director welcome card */
+    .director-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+    }
+
+    .director-photo {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #dbe8f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      font-family: var(--font-heading);
+      border: 3px solid var(--color-accent);
+      margin-bottom: 16px;
+    }
+
+    .director-quote {
+      font-style: italic;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .director-name {
+      font-weight: 700;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+
+    .director-title {
+      font-size: 0.78rem;
+      color: var(--color-accent);
+      letter-spacing: 0.04em;
+    }
+
+    /* Programmes section */
+    .programme-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      padding: 28px;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .programme-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    .prog-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .prog-icon-1 { background: #dbe8f7; }
+    .prog-icon-2 { background: #fef3dc; }
+    .prog-icon-3 { background: #d7f0e4; }
+    .prog-icon-4 { background: #f0e6ff; }
+
+    .programme-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .programme-card p {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    /* News section */
+    .news-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    .news-img {
+      height: 160px;
+      background: #dbe8f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .news-body { padding: 20px; }
+
+    .news-date {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      margin-bottom: 6px;
+    }
+
+    .news-body h4 { margin-bottom: 8px; }
+    .news-body p  { font-size: 0.88rem; color: var(--color-text-muted); }
+
+    /* CTA banner */
+    .cta-banner {
+      background: var(--color-primary);
+      color: #fff;
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .cta-banner h2 { color: #fff; margin-bottom: 12px; }
+    .cta-banner p  { color: rgba(255,255,255,0.8); margin-bottom: 28px; font-size: 1.05rem; }
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .director-card { display: none; } /* hidden on small screens; content preserved in hero text */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       SITE HEADER & NAVIGATION
+       Sticky top bar with brand logo and
+       links to all four pages.
+  ══════════════════════════════════════════ -->
+  <header class="site-header" role="banner">
+    <div class="container nav-inner">
+      <!-- Brand logo -->
+      <a href="index.html" class="nav-logo" aria-label="TechBridge Institute — Home">
+        <div class="nav-logo-icon" aria-hidden="true">TB</div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">TechBridge Institute</span>
+          <span class="nav-logo-tagline">Bridging Education &amp; Technology</span>
+        </div>
+      </a>
+
+      <!-- Primary navigation -->
+      <nav aria-label="Primary navigation">
+        <ul class="nav-links">
+          <li><a href="index.html"        class="active" aria-current="page">Home</a></li>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="organization.html">Organisation</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════
+       HERO — Welcome + Director message
+  ══════════════════════════════════════════ -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="container hero-inner">
+      <!-- Left: headline and CTAs -->
+      <div class="hero-content">
+        <p class="section-label">Welcome to TechBridge Institute</p>
+        <h1 class="hero-headline" id="hero-heading">
+          Empowering the next generation through <span>technology education</span>
+        </h1>
+        <p class="hero-lead">
+          We equip students, professionals, and communities across West Africa with
+          the digital skills, critical thinking, and industry connections they need to
+          thrive in the 21st-century economy.
+        </p>
+        <div class="hero-actions">
+          <a href="about.html"        class="btn btn-primary">Discover our story</a>
+          <a href="organization.html" class="btn btn-outline">Meet our team</a>
+        </div>
+      </div>
+
+      <!-- Right: Executive Director welcome card -->
+      <aside class="director-card" aria-label="Welcome message from Executive Director">
+        <!-- Director initials avatar (replace with real photo in production) -->
+        <div class="director-photo" aria-hidden="true">AO</div>
+        <blockquote>
+          <p class="director-quote">
+            "At TechBridge Institute, we believe that every young person deserves access to
+            quality technology education. Our commitment is to build pathways — not walls —
+            between potential and opportunity. I warmly invite you to join our growing
+            community of learners, mentors, and changemakers."
+          </p>
+        </blockquote>
+        <p class="director-name">Prof. Afolabi Okonkwo</p>
+        <p class="director-title">Executive Director, TechBridge Institute</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       STATISTICS STRIP
+  ══════════════════════════════════════════ -->
+  <section class="stats-strip" aria-label="Key statistics">
+    <div class="container">
+      <div class="grid-4">
+        <div>
+          <p class="stat-number">12,400+</p>
+          <p class="stat-label">Students trained</p>
+        </div>
+        <div>
+          <p class="stat-number">38</p>
+          <p class="stat-label">Programmes offered</p>
+        </div>
+        <div>
+          <p class="stat-number">16</p>
+          <p class="stat-label">Years of excellence</p>
+        </div>
+        <div>
+          <p class="stat-number">94%</p>
+          <p class="stat-label">Graduate employment rate</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       CORE PROGRAMMES
+  ══════════════════════════════════════════ -->
+  <section class="section bg-white" aria-labelledby="prog-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What we offer</p>
+        <h2 id="prog-heading">Our core programmes</h2>
+        <p>
+          From foundational digital literacy to advanced software engineering, our
+          programmes are designed in partnership with industry to meet real-world needs.
+        </p>
+      </div>
+
+      <div class="grid-4">
+        <!-- Programme 1 -->
+        <article class="programme-card">
+          <div class="prog-icon prog-icon-1" aria-hidden="true">
+            <!-- Laptop icon shape -->
+            <svg width="28" height="22" viewBox="0 0 28 22" fill="none" aria-hidden="true">
+              <rect x="2" y="1" width="24" height="16" rx="2" stroke="#1a4a8a" stroke-width="1.5" fill="#dbe8f7"/>
+              <path d="M0 18h28" stroke="#1a4a8a" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="10" y="18" width="8" height="2" rx="1" fill="#1a4a8a"/>
+            </svg>
+          </div>
+          <h3>Software development</h3>
+          <p>Web, mobile and backend development using modern frameworks and industry best practices.</p>
+          <a href="about.html" class="badge badge-blue" style="margin-top:14px; display:inline-block;">Learn more</a>
+        </article>
+
+        <!-- Programme 2 -->
+        <article class="programme-card">
+          <div class="prog-icon prog-icon-2" aria-hidden="true">
+            <svg width="28" height="24" viewBox="0 0 28 24" fill="none" aria-hidden="true">
+              <circle cx="14" cy="12" r="8" stroke="#8a5a00" stroke-width="1.5" fill="#fef3dc"/>
+              <path d="M14 4v4M14 16v4M4 12h4M20 12h4" stroke="#8a5a00" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Data science &amp; AI</h3>
+          <p>Data analysis, machine learning, and artificial intelligence for business and research applications.</p>
+          <a href="about.html" class="badge badge-amber" style="margin-top:14px; display:inline-block;">Learn more</a>
+        </article>
+
+        <!-- Programme 3 -->
+        <article class="programme-card">
+          <div class="prog-icon prog-icon-3" aria-hidden="true">
+            <svg width="28" height="24" viewBox="0 0 28 24" fill="none" aria-hidden="true">
+              <rect x="2" y="6" width="24" height="14" rx="2" stroke="#1d7a4f" stroke-width="1.5" fill="#d7f0e4"/>
+              <path d="M10 2l8 4" stroke="#1d7a4f" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="10" y="10" width="8" height="5" rx="1" fill="#1d7a4f"/>
+            </svg>
+          </div>
+          <h3>Cybersecurity</h3>
+          <p>Network security, ethical hacking, and digital forensics — certified pathways for security professionals.</p>
+          <a href="about.html" class="badge badge-green" style="margin-top:14px; display:inline-block;">Learn more</a>
+        </article>
+
+        <!-- Programme 4 -->
+        <article class="programme-card">
+          <div class="prog-icon prog-icon-4" aria-hidden="true">
+            <svg width="28" height="24" viewBox="0 0 28 24" fill="none" aria-hidden="true">
+              <circle cx="14" cy="12" r="10" stroke="#6b3fa0" stroke-width="1.5" fill="#f0e6ff"/>
+              <path d="M9 12l3 3 7-7" stroke="#6b3fa0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Digital entrepreneurship</h3>
+          <p>Business development, startup incubation, and technology innovation for aspiring entrepreneurs.</p>
+          <a href="about.html" class="badge" style="background:#f0e6ff;color:#6b3fa0;margin-top:14px;display:inline-block;">Learn more</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       RECENT NEWS
+  ══════════════════════════════════════════ -->
+  <section class="section bg-light" aria-labelledby="news-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Latest updates</p>
+        <h2 id="news-heading">News &amp; events</h2>
+        <p>Stay informed about our latest achievements, upcoming events, and community initiatives.</p>
+      </div>
+
+      <div class="grid-3">
+        <!-- News item 1 -->
+        <article class="news-card">
+          <div class="news-img" aria-label="Students at graduation ceremony">
+            <span>Graduation ceremony 2024</span>
+          </div>
+          <div class="news-body">
+            <p class="news-date">15 March 2025</p>
+            <h4>Over 800 students graduate in 2025 cohort</h4>
+            <p>TechBridge celebrates its largest graduating class yet, with students from 14 countries receiving certificates and diplomas.</p>
+          </div>
+        </article>
+
+        <!-- News item 2 -->
+        <article class="news-card">
+          <div class="news-img" aria-label="Partnership signing event">
+            <span>Industry partnership</span>
+          </div>
+          <div class="news-body">
+            <p class="news-date">2 February 2025</p>
+            <h4>New partnership with Lagos Tech Hub established</h4>
+            <p>The agreement provides students with internship placements, mentorship access, and direct employment pathways.</p>
+          </div>
+        </article>
+
+        <!-- News item 3 -->
+        <article class="news-card">
+          <div class="news-img" aria-label="Women in Tech workshop">
+            <span>Women in Tech 2025</span>
+          </div>
+          <div class="news-body">
+            <p class="news-date">20 January 2025</p>
+            <h4>Women in Tech scholarship fund exceeds target</h4>
+            <p>Our annual fundraising campaign raised ₦48 million, enabling 120 women to pursue technology education fully funded.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       CALL TO ACTION BANNER
+  ══════════════════════════════════════════ -->
+  <section class="cta-banner" aria-labelledby="cta-heading">
+    <div class="container">
+      <h2 id="cta-heading">Ready to begin your technology journey?</h2>
+      <p>Join thousands of learners who have transformed their careers through TechBridge Institute.</p>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a href="contact.html" class="btn btn-primary">Apply now</a>
+        <a href="about.html"   class="btn btn-outline">Learn more about us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SITE FOOTER
+  ══════════════════════════════════════════ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Column 1 — brand -->
+        <div>
+          <p class="footer-brand-name">TechBridge Institute</p>
+          <p class="footer-tagline">Bridging education and technology across West Africa since 2009.</p>
+          <p style="font-size:0.85rem; color:rgba(255,255,255,0.55);">Accredited by the National Board for Technical Education (NBTE) and the Information Technology Developers Association of Nigeria (ITAN).</p>
+        </div>
+
+        <!-- Column 2 — quick links -->
+        <div>
+          <h5>Quick links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="organization.html">Organisation</a></li>
+            <li><a href="contact.html">Contact us</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3 — programmes -->
+        <div>
+          <h5>Programmes</h5>
+          <ul class="footer-links">
+            <li><a href="about.html">Software development</a></li>
+            <li><a href="about.html">Data science &amp; AI</a></li>
+            <li><a href="about.html">Cybersecurity</a></li>
+            <li><a href="about.html">Digital entrepreneurship</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4 — contact snippet -->
+        <div>
+          <h5>Contact</h5>
+          <ul class="footer-links" style="gap:10px;">
+            <li style="color:rgba(255,255,255,0.65); font-size:0.88rem;">14 Innovation Drive, Victoria Island, Lagos</li>
+            <li><a href="tel:+2341234567890">+234 (0)12-345-6789</a></li>
+            <li><a href="mailto:info@techbridge.edu.ng">info@techbridge.edu.ng</a></li>
+            <li><a href="https://www.techbridge.edu.ng">www.techbridge.edu.ng</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer bottom bar -->
+      <div class="footer-bottom">
+        <p>&copy; 2025 TechBridge Institute. All rights reserved.</p>
+        <p>Designed for educational purposes.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    TechBridge Institute — Organisation Page (organization.html)
+    ============================================================
+    Purpose : Management team profiles, staff units, and a
+              detailed list of activities undertaken by each unit.
+    Linked  : index.html | about.html | contact.html
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Meet the TechBridge Institute management team and learn about our organisational units.">
+  <title>Organisation | TechBridge Institute</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ── Organisation page specific styles ── */
+
+    /* Management section — larger feature cards for top leadership */
+    .mgmt-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .mgmt-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.1);
+    }
+
+    .mgmt-photo {
+      background: #dbe8f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      font-weight: 700;
+      font-family: var(--font-heading);
+      color: var(--color-primary);
+    }
+
+    .mgmt-info {
+      padding: 28px;
+    }
+
+    .mgmt-info h3 { margin-bottom: 2px; }
+
+    .mgmt-role {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-accent-dk);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .mgmt-bio {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    @media (max-width: 640px) {
+      .mgmt-card { grid-template-columns: 1fr; }
+      .mgmt-photo { aspect-ratio: 16/7; font-size: 2.5rem; }
+    }
+
+    /* Units section */
+    .units-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+
+    @media (max-width: 700px) {
+      .units-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Filter tabs */
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .filter-tab {
+      padding: 8px 20px;
+      border-radius: 20px;
+      border: 1.5px solid var(--color-border);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: var(--color-surface);
+      color: var(--color-text-muted);
+      transition: all 0.2s;
+    }
+
+    .filter-tab:hover,
+    .filter-tab.active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #fff;
+    }
+
+    /* Unit colour accent strip */
+    .unit-card { border-top: 4px solid; }
+    .unit-card:nth-child(1) { border-color: var(--color-primary); }
+    .unit-card:nth-child(2) { border-color: var(--color-accent); }
+    .unit-card:nth-child(3) { border-color: #1d7a4f; }
+    .unit-card:nth-child(4) { border-color: #7a3ea0; }
+    .unit-card:nth-child(5) { border-color: #c0392b; }
+    .unit-card:nth-child(6) { border-color: #16889e; }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════════════ -->
+  <header class="site-header" role="banner">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="TechBridge Institute — Home">
+        <div class="nav-logo-icon" aria-hidden="true">TB</div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">TechBridge Institute</span>
+          <span class="nav-logo-tagline">Bridging Education &amp; Technology</span>
+        </div>
+      </a>
+      <nav aria-label="Primary navigation">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="organization.html" class="active" aria-current="page">Organisation</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════
+       PAGE HERO
+  ══════════════════════════════════════════ -->
+  <section class="page-hero" aria-labelledby="page-heading">
+    <div class="container">
+      <p class="section-label" style="color:var(--color-accent);">People &amp; structure</p>
+      <h1 id="page-heading">Our organisation</h1>
+      <p>
+        TechBridge Institute is powered by a dedicated team of educators, researchers,
+        and administrative professionals committed to delivering transformative learning experiences.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       MANAGEMENT TEAM
+  ══════════════════════════════════════════ -->
+  <section class="section bg-white" aria-labelledby="mgmt-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Leadership</p>
+        <h2 id="mgmt-heading">Management team</h2>
+        <p>Meet the experienced leaders who guide TechBridge Institute's strategy, operations, and academic excellence.</p>
+      </div>
+
+      <!-- Executive Director — featured card -->
+      <div class="mgmt-card" style="margin-bottom:28px; max-width:800px; margin-left:auto; margin-right:auto;" role="article">
+        <div class="mgmt-photo" aria-hidden="true">AO</div>
+        <div class="mgmt-info">
+          <h3>Prof. Afolabi Okonkwo, PhD</h3>
+          <p class="mgmt-role">Executive Director &amp; Co-Founder</p>
+          <p class="mgmt-bio">
+            Professor Okonkwo holds a PhD in Computer Science from the University of Lagos and
+            an MBA from Cranfield University, United Kingdom. With over 25 years of combined
+            academic and industry experience, he founded TechBridge in 2009 with a vision to
+            democratise technology education in West Africa. He sits on the boards of the
+            Information Technology Developers Association of Nigeria (ITAN) and the ECOWAS
+            Digital Skills Task Force.
+          </p>
+        </div>
+      </div>
+
+      <!-- Three-column grid for remaining management -->
+      <div class="grid-3">
+
+        <!-- Deputy Director -->
+        <article class="staff-card">
+          <div class="staff-photo-wrap" aria-hidden="true">CE</div>
+          <div class="staff-info">
+            <h4>Dr. Chioma Eze</h4>
+            <p class="staff-role">Deputy Director, Academics</p>
+            <p class="staff-bio">
+              Dr. Eze leads all academic matters, programme development, and quality assurance.
+              A Cambridge-educated curriculum designer with 18 years of experience in higher
+              education, she is passionate about student-centred learning and inclusive pedagogy.
+            </p>
+          </div>
+        </article>
+
+        <!-- Director, Research -->
+        <article class="staff-card">
+          <div class="staff-photo-wrap" aria-hidden="true">FB</div>
+          <div class="staff-info">
+            <h4>Ms. Fatima Bello</h4>
+            <p class="staff-role">Director, Research &amp; Innovation</p>
+            <p class="staff-bio">
+              Ms. Bello oversees TechBridge's research agenda and industry collaboration
+              partnerships. She previously led the digital transformation programme at
+              Access Bank and holds an MSc in Technology Management from UCL.
+            </p>
+          </div>
+        </article>
+
+        <!-- Director, Finance -->
+        <article class="staff-card">
+          <div class="staff-photo-wrap" aria-hidden="true">TA</div>
+          <div class="staff-info">
+            <h4>Mr. Tunde Adeyemi, ICAN</h4>
+            <p class="staff-role">Director, Finance &amp; Operations</p>
+            <p class="staff-bio">
+              A chartered accountant with extensive non-profit and education sector experience,
+              Mr. Adeyemi manages budgeting, procurement, facilities, and all operational
+              functions across the institute's three campuses.
+            </p>
+          </div>
+        </article>
+
+        <!-- Director, Student Affairs -->
+        <article class="staff-card">
+          <div class="staff-photo-wrap" aria-hidden="true">GA</div>
+          <div class="staff-info">
+            <h4>Mrs. Grace Adeola</h4>
+            <p class="staff-role">Director, Student Affairs</p>
+            <p class="staff-bio">
+              Mrs. Adeola champions student well-being, career services, and alumni engagement.
+              She established TechBridge's award-winning mentorship scheme, which has connected
+              over 4,000 students with industry professionals.
+            </p>
+          </div>
+        </article>
+
+        <!-- HOD, Software Development -->
+        <article class="staff-card">
+          <div class="staff-photo-wrap" aria-hidden="true">EN</div>
+          <div class="staff-info">
+            <h4>Dr. Emeka Nwosu</h4>
+            <p class="staff-role">Head, Software Development Unit</p>
+            <p class="staff-bio">
+              Dr. Nwosu oversees TechBridge's flagship software development programmes. A
+              full-stack engineer and certified AWS architect, he ensures students graduate
+              with industry-grade technical skills and strong portfolios.
+            </p>
+          </div>
+        </article>
+
+        <!-- HOD, Data Science -->
+        <article class="staff-card">
+          <div class="staff-photo-wrap" aria-hidden="true">AK</div>
+          <div class="staff-info">
+            <h4>Dr. Amina Kazeem</h4>
+            <p class="staff-role">Head, Data Science &amp; AI Unit</p>
+            <p class="staff-bio">
+              Dr. Kazeem brings deep expertise in machine learning, statistical modelling,
+              and business intelligence. She leads TechBridge's AI research lab and has
+              published extensively in international data science journals.
+            </p>
+          </div>
+        </article>
+
+      </div><!-- /.grid-3 -->
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       STAFF & UNITS
+  ══════════════════════════════════════════ -->
+  <section class="section bg-light" aria-labelledby="units-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Departments</p>
+        <h2 id="units-heading">Units &amp; their activities</h2>
+        <p>
+          TechBridge operates six specialist units, each contributing distinct expertise to
+          the institute's educational mission.
+        </p>
+      </div>
+
+      <div class="units-grid">
+
+        <!-- Unit 1 — Academics & Training -->
+        <article class="unit-card">
+          <h3>Academics &amp; Training Unit</h3>
+          <p class="unit-head">
+            Unit Head: Dr. Emeka Nwosu &nbsp;|&nbsp; Staff: 42 lecturers, 8 lab technicians
+          </p>
+          <ul class="unit-activities" aria-label="Activities of Academics and Training Unit">
+            <li>Designing and delivering undergraduate and postgraduate diploma programmes in software development, data science, cybersecurity, and digital entrepreneurship.</li>
+            <li>Reviewing and updating curricula bi-annually in partnership with industry advisory boards to ensure relevance and competitiveness.</li>
+            <li>Coordinating examinations, assessments, and academic integrity processes across all campuses and online platforms.</li>
+            <li>Managing laboratory facilities, equipment maintenance schedules, and software licence procurement.</li>
+            <li>Providing professional development workshops and short courses for working professionals and corporate clients.</li>
+            <li>Running the lecturer development programme to enhance teaching quality and pedagogical innovation.</li>
+          </ul>
+        </article>
+
+        <!-- Unit 2 — Research & Innovation -->
+        <article class="unit-card">
+          <h3>Research &amp; Innovation Unit</h3>
+          <p class="unit-head">
+            Unit Head: Ms. Fatima Bello &nbsp;|&nbsp; Staff: 12 researchers, 4 innovation leads
+          </p>
+          <ul class="unit-activities" aria-label="Activities of Research and Innovation Unit">
+            <li>Conducting applied technology research addressing challenges in healthcare, agriculture, finance, and public administration across West Africa.</li>
+            <li>Publishing peer-reviewed papers, case studies, and policy briefs in collaboration with national and international academic institutions.</li>
+            <li>Managing the TechBridge Innovation Lab, which provides co-working space, prototyping equipment, and mentorship to student entrepreneurs.</li>
+            <li>Administering the annual TechSolve Hackathon, attracting over 600 participants from across Nigeria and neighbouring countries.</li>
+            <li>Facilitating technology transfer agreements and intellectual property registrations for commercially viable student inventions.</li>
+          </ul>
+        </article>
+
+        <!-- Unit 3 — Finance & Operations -->
+        <article class="unit-card">
+          <h3>Finance &amp; Operations Unit</h3>
+          <p class="unit-head">
+            Unit Head: Mr. Tunde Adeyemi &nbsp;|&nbsp; Staff: 18 finance staff, 22 facilities staff
+          </p>
+          <ul class="unit-activities" aria-label="Activities of Finance and Operations Unit">
+            <li>Preparing and managing the institute's annual budget of over ₦2.4 billion, ensuring fiscal discipline and transparency.</li>
+            <li>Overseeing procurement, asset management, and vendor relationships for all campuses and online infrastructure.</li>
+            <li>Managing payroll, staff benefits administration, and compliance with statutory financial obligations.</li>
+            <li>Maintaining and developing campus facilities, including classrooms, laboratories, hostels, and common areas.</li>
+            <li>Coordinating health and safety compliance, security services, and business continuity planning.</li>
+            <li>Producing quarterly and annual financial reports for the Board of Trustees and regulatory authorities.</li>
+          </ul>
+        </article>
+
+        <!-- Unit 4 — Student Affairs -->
+        <article class="unit-card">
+          <h3>Student Affairs Unit</h3>
+          <p class="unit-head">
+            Unit Head: Mrs. Grace Adeola &nbsp;|&nbsp; Staff: 14 counsellors, 10 career advisers
+          </p>
+          <ul class="unit-activities" aria-label="Activities of Student Affairs Unit">
+            <li>Providing academic counselling, mental health support, and pastoral care to all enrolled students.</li>
+            <li>Operating the Career Services Centre, including CV clinics, interview preparation workshops, and employer engagement events.</li>
+            <li>Administering the TechBridge Scholarship Fund, identifying and supporting financially disadvantaged students with merit-based awards.</li>
+            <li>Coordinating student clubs, societies, and extracurricular technology competitions such as hackathons and coding challenges.</li>
+            <li>Managing the alumni network of over 12,400 graduates, facilitating mentorship matching and networking events.</li>
+            <li>Overseeing student accommodation, transport, and on-campus welfare services across all three campuses.</li>
+          </ul>
+        </article>
+
+        <!-- Unit 5 — ICT Services -->
+        <article class="unit-card">
+          <h3>ICT Services Unit</h3>
+          <p class="unit-head">
+            Unit Head: Mr. Kayode Sule &nbsp;|&nbsp; Staff: 16 engineers, 6 support analysts
+          </p>
+          <ul class="unit-activities" aria-label="Activities of ICT Services Unit">
+            <li>Maintaining and upgrading the institute's network infrastructure, servers, and cloud computing environments across three campuses.</li>
+            <li>Developing and supporting the TechBridge Learning Management System (TBLMS), used by over 2,500 active learners.</li>
+            <li>Ensuring cybersecurity compliance, data protection, and system uptime through proactive monitoring and incident response.</li>
+            <li>Providing first-line and second-line technical support to staff and students, resolving hardware and software issues.</li>
+            <li>Evaluating and integrating emerging educational technologies, including virtual reality labs and AI-powered tutoring tools.</li>
+          </ul>
+        </article>
+
+        <!-- Unit 6 — Marketing & Communications -->
+        <article class="unit-card">
+          <h3>Marketing &amp; Communications Unit</h3>
+          <p class="unit-head">
+            Unit Head: Ms. Ngozi Osei &nbsp;|&nbsp; Staff: 9 marketing staff, 4 designers
+          </p>
+          <ul class="unit-activities" aria-label="Activities of Marketing and Communications Unit">
+            <li>Developing and executing integrated marketing campaigns to attract prospective students domestically and internationally.</li>
+            <li>Managing the institute's website, social media platforms, and digital advertising accounts to maintain strong online presence.</li>
+            <li>Producing printed and digital publications including the TechBridge Annual Report, programme brochures, and the quarterly newsletter.</li>
+            <li>Coordinating press relations, media interviews, and the institute's participation in education fairs and industry conferences.</li>
+            <li>Planning and executing institutional events including the annual Convocation Ceremony, Open Days, and the TechBridge Technology Summit.</li>
+          </ul>
+        </article>
+
+      </div><!-- /.units-grid -->
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       CTA
+  ══════════════════════════════════════════ -->
+  <section style="background:var(--color-primary); padding:52px 0; text-align:center;" aria-labelledby="org-cta-heading">
+    <div class="container">
+      <h2 id="org-cta-heading" style="color:#fff; margin-bottom:10px;">Interested in joining our team?</h2>
+      <p style="color:rgba(255,255,255,0.78); margin-bottom:24px; font-size:1.05rem;">
+        We are always looking for passionate educators, researchers, and professionals to join TechBridge.
+      </p>
+      <a href="contact.html" class="btn btn-primary">Get in touch</a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-brand-name">TechBridge Institute</p>
+          <p class="footer-tagline">Bridging education and technology across West Africa since 2009.</p>
+        </div>
+        <div>
+          <h5>Quick links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="organization.html">Organisation</a></li>
+            <li><a href="contact.html">Contact us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Units</h5>
+          <ul class="footer-links">
+            <li><a href="organization.html">Academics &amp; Training</a></li>
+            <li><a href="organization.html">Research &amp; Innovation</a></li>
+            <li><a href="organization.html">Finance &amp; Operations</a></li>
+            <li><a href="organization.html">Student Affairs</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Contact</h5>
+          <ul class="footer-links">
+            <li style="color:rgba(255,255,255,0.65); font-size:0.88rem;">14 Innovation Drive, Victoria Island, Lagos</li>
+            <li><a href="tel:+2341234567890">+234 (0)12-345-6789</a></li>
+            <li><a href="mailto:info@techbridge.edu.ng">info@techbridge.edu.ng</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 TechBridge Institute. All rights reserved.</p>
+        <p>Designed for educational purposes.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

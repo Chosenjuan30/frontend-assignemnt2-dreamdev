@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    TechBridge Institute — Contact Us Page (contact.html)
+    ======================================================
+    Purpose : Display contact details (address, phone, email,
+              URL) and a contact enquiry form. Also includes
+              a map placeholder and campus listing.
+    Linked  : index.html | about.html | organization.html
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get in touch with TechBridge Institute — addresses, phone numbers, email, and online enquiry form.">
+  <title>Contact Us | TechBridge Institute</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ── Contact page specific styles ── */
+
+    /* Two-column layout: form + info panel */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .contact-layout { grid-template-columns: 1fr; }
+    }
+
+    /* Info panel */
+    .info-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Campus tabs */
+    .campus-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .campus-tab {
+      padding: 8px 18px;
+      border-radius: 20px;
+      border: 1.5px solid var(--color-border);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: var(--color-surface);
+      color: var(--color-text-muted);
+      transition: all 0.2s;
+    }
+
+    .campus-tab.active,
+    .campus-tab:hover {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #fff;
+    }
+
+    /* Campus address card */
+    .campus-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    .campus-header {
+      background: var(--color-primary);
+      padding: 16px 20px;
+      color: #fff;
+    }
+
+    .campus-header h4 { color: #fff; margin: 0; }
+    .campus-header span { font-size: 0.78rem; color: rgba(255,255,255,0.7); }
+
+    .campus-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .campus-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .campus-row-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: #dbe8f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .campus-row-content { line-height: 1.4; }
+    .campus-row-label { font-size: 0.72rem; color: var(--color-text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 2px; }
+    .campus-row-value { font-size: 0.92rem; color: var(--color-text); }
+    .campus-row-value a { color: var(--color-primary); }
+
+    /* Form card */
+    .form-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      padding: 36px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .form-card h2 { margin-bottom: 6px; }
+    .form-card > p { color: var(--color-text-muted); font-size: 0.92rem; margin-bottom: 28px; }
+
+    /* Success message (shown after form submit) */
+    .form-success {
+      display: none;
+      background: #d7f0e4;
+      border: 1px solid #1d7a4f;
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      color: #1d7a4f;
+      font-size: 0.95rem;
+      margin-top: 16px;
+    }
+
+    /* Social links */
+    .social-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--radius-md);
+      font-size: 0.83rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1.5px solid var(--color-border);
+      color: var(--color-text);
+      transition: all 0.2s;
+    }
+
+    .social-link:hover {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* FAQ accordion */
+    .faq-item {
+      border-bottom: 1px solid var(--color-border);
+      padding: 18px 0;
+    }
+
+    .faq-q {
+      font-weight: 600;
+      color: var(--color-primary-dk);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.95rem;
+    }
+
+    .faq-a {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin-top: 10px;
+      line-height: 1.65;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════════════ -->
+  <header class="site-header" role="banner">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="TechBridge Institute — Home">
+        <div class="nav-logo-icon" aria-hidden="true">TB</div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">TechBridge Institute</span>
+          <span class="nav-logo-tagline">Bridging Education &amp; Technology</span>
+        </div>
+      </a>
+      <nav aria-label="Primary navigation">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="organization.html">Organisation</a></li>
+          <li><a href="contact.html" class="active" aria-current="page">Contact us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════
+       PAGE HERO
+  ══════════════════════════════════════════ -->
+  <section class="page-hero" aria-labelledby="page-heading">
+    <div class="container">
+      <p class="section-label" style="color:var(--color-accent);">Get in touch</p>
+      <h1 id="page-heading">Contact TechBridge Institute</h1>
+      <p>
+        Whether you are a prospective student, corporate partner, researcher, or media
+        professional, we would be delighted to hear from you.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       MAIN CONTACT SECTION
+  ══════════════════════════════════════════ -->
+  <section class="section bg-white" aria-labelledby="contact-form-heading">
+    <div class="container">
+      <div class="contact-layout">
+
+        <!-- Left: Enquiry form -->
+        <div class="form-card">
+          <h2 id="contact-form-heading">Send us a message</h2>
+          <p>Fill in the form below and a member of our team will respond within two business days.</p>
+
+          <form id="contactForm" action="#" method="post" novalidate>
+
+            <!-- Name row -->
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+              <div class="form-group">
+                <label for="firstName">First name <span style="color:#c0392b;" aria-hidden="true">*</span></label>
+                <input type="text" id="firstName" name="firstName" required placeholder="e.g. Chukwuemeka" autocomplete="given-name">
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last name <span style="color:#c0392b;" aria-hidden="true">*</span></label>
+                <input type="text" id="lastName" name="lastName" required placeholder="e.g. Okafor" autocomplete="family-name">
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email">Email address <span style="color:#c0392b;" aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" required placeholder="yourname@example.com" autocomplete="email">
+            </div>
+
+            <!-- Phone -->
+            <div class="form-group">
+              <label for="phone">Phone number (optional)</label>
+              <input type="tel" id="phone" name="phone" placeholder="+234 (0)80 0000 0000" autocomplete="tel">
+            </div>
+
+            <!-- Enquiry type -->
+            <div class="form-group">
+              <label for="enquiryType">Enquiry type <span style="color:#c0392b;" aria-hidden="true">*</span></label>
+              <select id="enquiryType" name="enquiryType" required>
+                <option value="" disabled selected>Select an option…</option>
+                <option value="admissions">Programme admissions</option>
+                <option value="corporate">Corporate training partnership</option>
+                <option value="scholarship">Scholarship &amp; bursary</option>
+                <option value="research">Research collaboration</option>
+                <option value="media">Media &amp; press</option>
+                <option value="careers">Career opportunities</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <!-- Campus -->
+            <div class="form-group">
+              <label for="campus">Preferred campus</label>
+              <select id="campus" name="campus">
+                <option value="">No preference</option>
+                <option value="lagos">Lagos (Victoria Island)</option>
+                <option value="abuja">Abuja (Garki)</option>
+                <option value="ph">Port Harcourt (Trans-Amadi)</option>
+                <option value="online">Online / virtual</option>
+              </select>
+            </div>
+
+            <!-- Message -->
+            <div class="form-group">
+              <label for="message">Your message <span style="color:#c0392b;" aria-hidden="true">*</span></label>
+              <textarea id="message" name="message" required placeholder="Please provide as much detail as possible so we can direct your enquiry to the right person…"></textarea>
+            </div>
+
+            <!-- Privacy checkbox -->
+            <div class="form-group" style="display:flex; gap:10px; align-items:flex-start;">
+              <input type="checkbox" id="privacy" name="privacy" required style="width:auto; margin-top:3px;">
+              <label for="privacy" style="font-weight:400; font-size:0.88rem; color:var(--color-text-muted);">
+                I have read and agree to TechBridge's
+                <a href="#">Privacy Policy</a>. I consent to my details being used to process and respond to this enquiry.
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-secondary" style="width:100%; justify-content:center;">
+              Send enquiry
+            </button>
+
+            <!-- Success confirmation (shown via JS after submit) -->
+            <div class="form-success" id="formSuccess" role="alert">
+              Thank you for your message. We will get back to you within two business days.
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Right: Contact info panel -->
+        <div class="info-panel">
+
+          <!-- Main campus card — Lagos -->
+          <div class="campus-card" role="article" aria-labelledby="lagos-heading">
+            <div class="campus-header">
+              <h4 id="lagos-heading">Lagos campus (headquarters)</h4>
+              <span>Main administrative and training hub</span>
+            </div>
+            <div class="campus-body">
+              <div class="campus-row">
+                <div class="campus-row-icon" aria-hidden="true">
+                  <!-- Location pin SVG -->
+                  <svg width="14" height="18" viewBox="0 0 14 18" fill="none"><path d="M7 0C3.13 0 0 3.13 0 7c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 7 4.5a2.5 2.5 0 0 1 0 5z" fill="#1a4a8a"/></svg>
+                </div>
+                <div class="campus-row-content">
+                  <p class="campus-row-label">Address</p>
+                  <p class="campus-row-value">14 Innovation Drive, Victoria Island,<br>Lagos, Nigeria. ZIP: 101001</p>
+                </div>
+              </div>
+              <div class="campus-row">
+                <div class="campus-row-icon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 1C1.89 1 1 1.89 1 3c0 8.28 6.72 14 14 14 .55 0 1-.45 1-1v-2.5c0-.55-.45-1-1-1h-2c-.55 0-1 .45-1 1-.5.9-1.5 1.5-2.5 1.5C5.22 15 1 10.78 1 6c0-1 .6-2 1.5-2.5V1.5c0-.28-.22-.5-.5-.5H3z" fill="#1a4a8a"/></svg>
+                </div>
+                <div class="campus-row-content">
+                  <p class="campus-row-label">Main switchboard</p>
+                  <p class="campus-row-value"><a href="tel:+2341234567890">+234 (0)12-345-6789</a></p>
+                </div>
+              </div>
+              <div class="campus-row">
+                <div class="campus-row-icon" aria-hidden="true">
+                  <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><rect x="0.5" y="0.5" width="15" height="11" rx="1.5" stroke="#1a4a8a"/><path d="M0.5 2l7.5 5 7.5-5" stroke="#1a4a8a"/></svg>
+                </div>
+                <div class="campus-row-content">
+                  <p class="campus-row-label">General enquiries</p>
+                  <p class="campus-row-value"><a href="mailto:info@techbridge.edu.ng">info@techbridge.edu.ng</a></p>
+                </div>
+              </div>
+              <div class="campus-row">
+                <div class="campus-row-icon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#1a4a8a"/><path d="M8 4v4l3 2" stroke="#1a4a8a" stroke-linecap="round"/></svg>
+                </div>
+                <div class="campus-row-content">
+                  <p class="campus-row-label">Office hours</p>
+                  <p class="campus-row-value">Monday – Friday: 8:00 am – 6:00 pm<br>Saturday: 9:00 am – 1:00 pm</p>
+                </div>
+              </div>
+              <div class="campus-row">
+                <div class="campus-row-icon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#1a4a8a"/><path d="M5 8h6M8 5v6" stroke="#1a4a8a" stroke-linecap="round"/></svg>
+                </div>
+                <div class="campus-row-content">
+                  <p class="campus-row-label">Website</p>
+                  <p class="campus-row-value"><a href="https://www.techbridge.edu.ng" target="_blank" rel="noopener">www.techbridge.edu.ng</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Abuja campus -->
+          <div class="campus-card" role="article" aria-labelledby="abuja-heading">
+            <div class="campus-header" style="background:var(--color-primary-dk);">
+              <h4 id="abuja-heading">Abuja campus</h4>
+              <span>Garki II, Federal Capital Territory</span>
+            </div>
+            <div class="campus-body">
+              <div class="campus-row">
+                <div class="campus-row-icon" aria-hidden="true">
+                  <svg width="14" height="18" viewBox="0 0 14 18" fill="none"><path d="M7 0C3.13 0 0 3.13 0 7c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 7 4.5a2.5 2.5 0 0 1 0 5z" fill="#1a4a8a"/></svg>
+                </div>
+                <div class="campus-row-content">
+                  <p class="campus-row-label">Address</p>
+                  <p class="campus-row-value">22 Mohammed Buhari Way, Garki II,<br>Abuja, FCT. ZIP: 900211</p>
+                </div>
+              </div>
+              <div class="campus-row">
+                <div class="campus-row-icon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 1C1.89 1 1 1.89 1 3c0 8.28 6.72 14 14 14 .55 0 1-.45 1-1v-2.5c0-.55-.45-1-1-1h-2c-.55 0-1 .45-1 1-.5.9-1.5 1.5-2.5 1.5C5.22 15 1 10.78 1 6c0-1 .6-2 1.5-2.5V1.5c0-.28-.22-.5-.5-.5H3z" fill="#1a4a8a"/></svg>
+                </div>
+                <div class="campus-row-content">
+                  <p class="campus-row-label">Phone</p>
+                  <p class="campus-row-value"><a href="tel:+2349012345678">+234 (0)90-1234-5678</a></p>
+                </div>
+              </div>
+              <div class="campus-row">
+                <div class="campus-row-icon" aria-hidden="true">
+                  <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><rect x="0.5" y="0.5" width="15" height="11" rx="1.5" stroke="#1a4a8a"/><path d="M0.5 2l7.5 5 7.5-5" stroke="#1a4a8a"/></svg>
+                </div>
+                <div class="campus-row-content">
+                  <p class="campus-row-label">Email</p>
+                  <p class="campus-row-value"><a href="mailto:abuja@techbridge.edu.ng">abuja@techbridge.edu.ng</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Port Harcourt campus -->
+          <div class="campus-card" role="article" aria-labelledby="ph-heading">
+            <div class="campus-header" style="background:#16425b;">
+              <h4 id="ph-heading">Port Harcourt campus</h4>
+              <span>Trans-Amadi Industrial Layout, Rivers State</span>
+            </div>
+            <div class="campus-body">
+              <div class="campus-row">
+                <div class="campus-row-icon" aria-hidden="true">
+                  <svg width="14" height="18" viewBox="0 0 14 18" fill="none"><path d="M7 0C3.13 0 0 3.13 0 7c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 7 4.5a2.5 2.5 0 0 1 0 5z" fill="#1a4a8a"/></svg>
+                </div>
+                <div class="campus-row-content">
+                  <p class="campus-row-label">Address</p>
+                  <p class="campus-row-value">8 Tech Avenue, Trans-Amadi,<br>Port Harcourt, Rivers State. ZIP: 500211</p>
+                </div>
+              </div>
+              <div class="campus-row">
+                <div class="campus-row-icon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 1C1.89 1 1 1.89 1 3c0 8.28 6.72 14 14 14 .55 0 1-.45 1-1v-2.5c0-.55-.45-1-1-1h-2c-.55 0-1 .45-1 1-.5.9-1.5 1.5-2.5 1.5C5.22 15 1 10.78 1 6c0-1 .6-2 1.5-2.5V1.5c0-.28-.22-.5-.5-.5H3z" fill="#1a4a8a"/></svg>
+                </div>
+                <div class="campus-row-content">
+                  <p class="campus-row-label">Phone</p>
+                  <p class="campus-row-value"><a href="tel:+2348012345678">+234 (0)80-1234-5678</a></p>
+                </div>
+              </div>
+              <div class="campus-row">
+                <div class="campus-row-icon" aria-hidden="true">
+                  <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><rect x="0.5" y="0.5" width="15" height="11" rx="1.5" stroke="#1a4a8a"/><path d="M0.5 2l7.5 5 7.5-5" stroke="#1a4a8a"/></svg>
+                </div>
+                <div class="campus-row-content">
+                  <p class="campus-row-label">Email</p>
+                  <p class="campus-row-value"><a href="mailto:ph@techbridge.edu.ng">ph@techbridge.edu.ng</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social links -->
+          <div>
+            <h4 style="margin-bottom:12px; font-size:0.92rem;">Follow us online</h4>
+            <div class="social-links">
+              <a href="https://twitter.com" target="_blank" rel="noopener" class="social-link">X / Twitter</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+              <a href="https://facebook.com" target="_blank" rel="noopener" class="social-link">Facebook</a>
+              <a href="https://instagram.com" target="_blank" rel="noopener" class="social-link">Instagram</a>
+              <a href="https://youtube.com" target="_blank" rel="noopener" class="social-link">YouTube</a>
+            </div>
+          </div>
+
+        </div><!-- /.info-panel -->
+      </div><!-- /.contact-layout -->
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       MAP SECTION
+  ══════════════════════════════════════════ -->
+  <section class="section bg-light" aria-labelledby="map-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Find us</p>
+        <h2 id="map-heading">Lagos headquarters location</h2>
+        <p>14 Innovation Drive, Victoria Island, Lagos. Nearest landmark: Eko Hotel &amp; Suites.</p>
+      </div>
+
+      <!-- Map placeholder — replace with Google Maps embed or Leaflet.js in production -->
+      <div class="map-placeholder" role="img" aria-label="Map showing TechBridge Institute Lagos campus location at 14 Innovation Drive, Victoria Island, Lagos">
+        <div class="map-pin" aria-hidden="true"></div>
+        <span>TechBridge Institute, 14 Innovation Drive, Victoria Island, Lagos</span>
+        <span style="font-size:0.8rem; color:var(--color-text-muted);">(Replace with embedded map in production)</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       FAQ SECTION
+  ══════════════════════════════════════════ -->
+  <section class="section bg-white" aria-labelledby="faq-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Common questions</p>
+        <h2 id="faq-heading">Frequently asked questions</h2>
+      </div>
+
+      <div style="max-width:720px; margin:0 auto;">
+
+        <div class="faq-item">
+          <h3 class="faq-q">How do I apply for a programme at TechBridge?</h3>
+          <p class="faq-a">
+            You can apply online via our website at <a href="https://www.techbridge.edu.ng">www.techbridge.edu.ng</a>,
+            visit any of our three campuses in person, or call our admissions hotline on
+            +234 (0)12-345-6789 to speak with an admissions adviser.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-q">Are scholarships available for prospective students?</h3>
+          <p class="faq-a">
+            Yes. TechBridge administers several scholarship and bursary schemes, including the
+            Women in Tech Scholarship, the Merit Excellence Award, and the Corporate Bursary
+            Programme. Details and eligibility criteria are available on our website. You may
+            also submit a scholarship enquiry using the form on this page.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-q">Does TechBridge offer online or distance learning?</h3>
+          <p class="faq-a">
+            Yes. Our online learning division provides fully accredited programmes delivered
+            through the TechBridge Learning Management System (TBLMS). Online students receive
+            the same quality of instruction as campus students, including live virtual classes,
+            recorded lectures, project mentorship, and career support.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-q">Can my organisation partner with TechBridge for staff training?</h3>
+          <p class="faq-a">
+            Absolutely. We work with organisations of all sizes to design bespoke training
+            programmes, executive workshops, and professional certification pathways. Please
+            select "Corporate training partnership" from the enquiry type in the form above,
+            or email <a href="mailto:partnerships@techbridge.edu.ng">partnerships@techbridge.edu.ng</a>.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-q">What are the entry requirements for diploma programmes?</h3>
+          <p class="faq-a">
+            Entry requirements vary by programme level. Foundation programmes require a
+            minimum of five O'level credits including Mathematics and English Language.
+            Advanced diploma programmes typically require a relevant first degree or
+            HND. Full requirements for each programme are listed on our admissions page.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-brand-name">TechBridge Institute</p>
+          <p class="footer-tagline">Bridging education and technology across West Africa since 2009.</p>
+        </div>
+        <div>
+          <h5>Quick links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="organization.html">Organisation</a></li>
+            <li><a href="contact.html">Contact us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Campuses</h5>
+          <ul class="footer-links">
+            <li style="color:rgba(255,255,255,0.65); font-size:0.88rem;">Lagos — Victoria Island</li>
+            <li style="color:rgba(255,255,255,0.65); font-size:0.88rem;">Abuja — Garki II</li>
+            <li style="color:rgba(255,255,255,0.65); font-size:0.88rem;">Port Harcourt — Trans-Amadi</li>
+            <li><a href="contact.html">Online / virtual</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Contact (Lagos HQ)</h5>
+          <ul class="footer-links">
+            <li style="color:rgba(255,255,255,0.65); font-size:0.88rem;">14 Innovation Drive, Victoria Island, Lagos</li>
+            <li><a href="tel:+2341234567890">+234 (0)12-345-6789</a></li>
+            <li><a href="mailto:info@techbridge.edu.ng">info@techbridge.edu.ng</a></li>
+            <li><a href="https://www.techbridge.edu.ng">www.techbridge.edu.ng</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 TechBridge Institute. All rights reserved.</p>
+        <p>Designed for educational purposes.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════
+       JAVASCRIPT — Form submission feedback
+  ══════════════════════════════════════════ -->
+  <script>
+    /*
+     * Simple client-side form validation and success feedback.
+     * In a production environment, replace this with a proper
+     * server-side form handler or third-party form service.
+     */
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent actual form submission in demo
+
+      var form = this;
+      var requiredFields = form.querySelectorAll('[required]');
+      var valid = true;
+
+      /* Basic validation: check all required fields are filled */
+      requiredFields.forEach(function(field) {
+        if (!field.value.trim()) {
+          valid = false;
+          field.style.borderColor = '#c0392b';
+        } else {
+          field.style.borderColor = '';
+        }
+      });
+
+      if (valid) {
+        /* Show success message and reset form */
+        document.getElementById('formSuccess').style.display = 'block';
+        form.reset();
+
+        /* Scroll success message into view */
+        document.getElementById('formSuccess').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        /* Hide success message after 6 seconds */
+        setTimeout(function() {
+          document.getElementById('formSuccess').style.display = 'none';
+        }, 6000);
+      }
+    });
+
+    /* Remove red border when user begins correcting a field */
+    document.querySelectorAll('#contactForm [required]').forEach(function(field) {
+      field.addEventListener('input', function() {
+        this.style.borderColor = '';
+      });
+    });
+  </script>
+
+</body>
+</html>
